@@ -406,12 +406,17 @@ public class Application {
 
             // Creates the initial main frame using any initial path specified by the command line.
             printStartupMessage("Initializing window...");
+            
+            splashScreen.delay(10);
+            
             List<String> folders = activator.getInitialFolders();
             if (CollectionUtils.isNotEmpty(folders)) {
                 WindowManager.createNewMainFrame(new CommandLineMainFrameBuilder(folders));
             } else {
                 WindowManager.createNewMainFrame(new DefaultMainFramesBuilder());
             }
+            
+            
             // Done launching, wake up threads waiting for the application being launched.
             // Important: this must be done before disposing the splash screen, as this would otherwise create a deadlock
             // if the AWT event thread were waiting in #waitUntilLaunched .
@@ -428,6 +433,8 @@ public class Application {
                     com.mucommander.ui.notifier.NotifierProvider.getNotifier().setEnabled(true);
             }
 
+            
+            
             // Dispose splash screen.
             if(splashScreen!=null)
                 splashScreen.dispose();
