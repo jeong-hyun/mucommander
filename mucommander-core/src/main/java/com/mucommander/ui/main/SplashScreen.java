@@ -23,6 +23,7 @@ import com.mucommander.ui.icon.IconManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -36,6 +37,10 @@ import java.awt.*;
  */
 public class SplashScreen extends JWindow {
 
+	/** my work */
+	private final String MY_NAME = "Jeong-Hyun Boo";
+	private final static Color NAME_COLOR = new Color(0, 0, 0);
+	
     /** muCommander version displayed on this splash screen */
     private String version;
 
@@ -96,7 +101,7 @@ public class SplashScreen extends JWindow {
         catch(InterruptedException e) {}
 
         setContentPane(new JLabel(imageIcon));
-		
+		       
         // Set size manually instead of using pack(), because of a bug under 1.3.1/Win32 which
         // eats a 1-pixel row of the image
         //		pack();
@@ -154,5 +159,23 @@ public class SplashScreen extends JWindow {
 
         g.setColor(TEXT_COLOR);
         g.drawString(version, textX, textY);
+        
+        g.setFont(new Font(FONT_NAME, FONT_STYLE, 30));
+        g.setColor(NAME_COLOR);
+        g.drawString(MY_NAME, getWidth()/6, getHeight()/4);
+        
+    }
+    
+    public void delay(int sec)
+    {
+    	try
+    	{
+    		TimeUnit.SECONDS.sleep(sec);	
+    	}
+    	catch(InterruptedException e)
+    	{
+    		e.printStackTrace();
+    	}
+    	
     }
 }
